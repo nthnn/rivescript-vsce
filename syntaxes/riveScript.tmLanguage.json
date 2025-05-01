@@ -1,0 +1,345 @@
+{
+    "name": "RiveScript",
+    "scopeName": "source.rivescript",
+    "fileTypes": ["rive"],
+    "foldingStartMarker": "^\\s*>\\s+topic.*$",
+    "foldingStopMarker": "^\\s*<\\s+topic.*$",
+    "patterns": [
+        {"include": "#comments"},
+        {"include": "#defines"},
+        {"include": "#labels"},
+        {"include": "#triggers"},
+        {"include": "#replies"},
+        {"include": "#conditions"}
+    ],
+    "repository": {
+        "special-characters": {
+            "patterns": [
+                {
+                    "match": "\\,|\\;|=|\\|",
+                    "name": "keyword.control.rivescript"
+                },
+                {
+                    "match": "\\*",
+                    "name": "support.constant.rivescript"
+                }
+            ]
+        },
+        "bin-ops": {
+            "patterns": [
+                {
+                    "match": "\\s(eq|ne|!=|==|<>|<=|>=|<|>)\\s",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.operator.comparison.rivescript"
+                        }
+                    }
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [{
+                "match": "//.*$",
+                "name": "comment.line.double-slash.rivescript"
+            }]
+        },
+        "arrays": {
+            "patterns": [{
+                "match": "@[A-Za-z0-9]*",
+                "captures": {
+                    "0": {
+                        "name": "variable.other.rivescript"
+                    }
+                },
+                "name": "meta.array.rivescript"
+            }]
+        },
+        "tags": {
+            "patterns": [
+                {
+                    "begin": "(<|\\{)(@)",
+                    "end": ">|\\}",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.rivescript"},
+                        "2": {"name": "support.function.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.tag.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#tags"},
+                        {"include": "#special-characters"},
+                        {"include": "#comments"}
+                    ]
+                },
+                {
+                    "begin": "(<|\\{)(topic)\\s*(?=\\=)",
+                    "end": ">|\\}",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.rivescript"},
+                        "2": {"name": "support.function.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.tag.rivescript",
+                    "contentName": "support.class.rivescript",
+                    "patterns": [
+                        {"include": "#tags"},
+                        {"include": "#special-characters"},
+                        {"include": "#comments"}
+                    ]
+                },
+                {
+                    "begin": "(<)(call)(>)([A-Za-z0-9\\-]+)",
+                    "end": "(</)(call)(>)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.rivescript"},
+                        "2": {"name": "support.function.rivescript"},
+                        "3": {"name": "keyword.control.rivescript"},
+                        "4": {"name": "support.function.rivescript"}
+                    },
+                    "endCaptures": {
+                        "1": {"name": "keyword.control.rivescript"},
+                        "2": {"name": "support.function.rivescript"},
+                        "3": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.tag.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#tags"},
+                        {"include": "#comments"}
+                    ]
+                },
+                {
+                    "begin": "(<|\\{)(/?[A-Za-z0-9]+)(\\s+[A-Za-z0-9]+)?",
+                    "end": ">|\\}",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.rivescript"},
+                        "2": {"name": "support.function.rivescript"},
+                        "3": {"name": "variable.other.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.tag.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#tags"},
+                        {"include": "#special-characters"},
+                        {"include": "#comments"}
+                    ]
+                }
+            ]
+        },
+        "defines": {
+            "patterns": [
+                {
+                    "begin": "^\\s*(\\!)\\s+(global|local)(\\s+[A-Za-z0-9\\-]+)?",
+                    "while": "^\\s*(\\^)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"},
+                        "2": {"name": "storage.type.rivescript"},
+                        "3": {"name": "variable.language.rivescript"}
+                    },
+                    "whileCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "contentName": "constant.language.rivescript",
+                    "name": "meta.define.rivescript",
+                    "patterns": [
+                        {"include": "#comments"},
+                        {"include": "#special-characters"}
+                    ]
+                },
+                {
+                    "begin": "^\\s*(\\!)\\s+(var|array)(\\s+[A-Za-z0-9\\-]+)?",
+                    "while": "^\\s*(\\^)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"},
+                        "2": {"name": "storage.type.rivescript"},
+                        "3": {"name": "variable.other.rivescript"}
+                    },
+                    "whileCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "contentName": "string.unquoted.rivescript",
+                    "name": "meta.define.rivescript",
+                    "patterns": [
+                        {"include": "#comments"},
+                        {"include": "#special-characters"}
+                    ]
+                },
+                {
+                    "begin": "^\\s*(\\!)\\s+(version|sub|person)(\\s+[^=]+(=))?",
+                    "while": "^\\s*(\\^)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"},
+                        "2": {"name": "storage.type.rivescript"},
+                        "3": {"name": "string.unquoted.rivescript"},
+                        "4": {"name": "keyword.operator.assignment.rivescript"}
+                    },
+                    "whileCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "contentName": "string.unquoted.rivescript",
+                    "name": "meta.define.rivescript",
+                    "patterns": [
+                        {"include": "#comments"},
+                        {"include": "#special-characters"}
+                    ]
+                }
+            ]
+        },
+        "labels": {
+            "patterns": [
+                {
+                    "match": "^(\\s*[<>]\\s+begin)",
+                    "captures": {
+                        "1": {"name": "support.constant.rivescript"}
+                    },
+                    "patterns": [{"include": "#comments"}]
+                },
+                {
+                    "begin": "^\\s*([<>]\\s+topic\\b)",
+                    "end": "$",
+                    "beginCaptures": {
+                        "1": {"name": "storage.type.class.rivescript"}
+                    },
+                    "contentName": "support.class.rivescript",
+                    "patterns": [
+                        {
+                            "match": "\\b(inherits|includes)\\b",
+                            "captures": {
+                                "1": {"name": "keyword.operator.rivescript"}
+                            }
+                        },
+                        {"include": "#comments"}
+                    ]
+                },
+                {
+                  "match": "^\\s*([<>]\\s+object)(\\s+([A-Za-z0-9\\-]+)(\\s+([A-Za-z0-9\\-]+))?)?",
+                  "captures": {
+                      "1": {"name": "storage.type.function.rivescript"},
+                      "3": {"name": "support.function.rivescript"},
+                      "5": {"name": "variable.parameter.rivescript"}
+                  },
+                  "patterns": [{"include": "#comments"}]
+                }
+            ]
+        },
+        "triggers": {
+            "patterns": [
+                {
+                    "begin": "^(\\s*[\\+%@]\\s)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.operator.rivescript"}
+                    },
+                    "contentName": "string.unquoted.rivescript",
+                    "end": "$",
+                    "name": "meta.trigger.rivescript",
+                    "patterns": [
+                        {"include": "#comments"},
+                        {"include": "#alternates"},
+                        {"include": "#arrays"},
+                        {"include": "#optionals"},
+                        {"include": "#special-characters"}
+                    ]
+                }
+            ]
+        },
+        "alternates": {
+            "patterns": [
+                {
+                    "begin": "\\(",
+                    "end": "\\)",
+                    "beginCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.alternates.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#special-characters"},
+                        {"include": "#arrays"},
+                        {"include": "#comments"}
+                    ]
+                }
+            ]
+        },
+        "optionals": {
+            "patterns": [
+                {
+                    "begin": "\\[",
+                    "end": "\\]",
+                    "beginCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.rivescript"}
+                    },
+                    "name": "meta.optionals.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#special-characters"},
+                        {"include": "#arrays"},
+                        {"include": "#comments"}
+                    ]
+                }
+            ]
+        },
+        "replies": {
+            "patterns": [
+                {
+                    "begin": "^\\s*(\\-)",
+                    "while": "^\\s*(\\^)",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "whileCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "name": "meta.reply.rivescript",
+                    "patterns": [{"include": "#replyContent"}]
+                }
+            ]
+        },
+        "replyContent": {
+            "patterns": [
+                {"include": "#tags"},
+                {"include": "#comments"}
+            ]
+        },
+        "conditions": {
+            "patterns": [
+                {
+                    "begin": "^\\s*(\\*)",
+                    "end": "=>",
+                    "beginCaptures": {
+                        "1": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "keyword.control.flow.rivescript"}
+                    },
+                    "name": "meta.condition.rivescript",
+                    "contentName": "string.unquoted.rivescript",
+                    "patterns": [
+                        {"include": "#tags"},
+                        {"include": "#bin-ops"},
+                        {"include": "#comments"}
+                    ]
+                },
+                {
+                    "begin": "(?<=\\=\\>)\\s",
+                    "end": "$",
+                    "name": "meta.condition.rivescript",
+                    "patterns": [{"include": "#replyContent"}]
+                }
+            ]
+        }
+    }
+}
