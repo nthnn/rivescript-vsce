@@ -1,3 +1,9 @@
+/*
+ * Copyright 2025 Nathanne Isip
+ * This file is part of RiveScript VS Code Extension (https://github.com/nthnn/rivescript-vsce)
+ * This code is licensed under MIT license (see LICENSE for details)
+ */
+
 const vscode = acquireVsCodeApi();
 
 const messagesDiv = document.getElementById("messages");
