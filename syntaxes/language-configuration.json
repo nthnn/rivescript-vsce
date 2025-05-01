@@ -1,0 +1,39 @@
+{
+    "comments": {"lineComment": "//"},
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["<", ">"]
+    ],
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"],
+        ["<", ">"],
+        ["> begin\n", "< begin"],
+        ["> topic ", "< topic"],
+        ["> object ", "< object"],
+        ["<call>", "</call>"]
+    ],
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"],
+        ["<", ">"]
+    ],
+    "folding": {
+        "markers": {
+            "start": "^\\s*(//|#)\\s*#region",
+            "end": "^\\s*(//|#)\\s*#endregion"
+        }
+    },
+    "indentationRules": {
+        "increaseIndentPattern": "^\\s*(\\+|-|%|>)\\s*.*(\\{[^}]*|\\[|\\b(begin|topic|object)\\b)$",
+        "decreaseIndentPattern": "^\\s*(\\}|\\]|\\bend\\b|</(begin|topic|object))"
+    }
+}
