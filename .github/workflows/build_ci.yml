@@ -1,0 +1,31 @@
+name: VSCode Extension Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Rhea VSCode extension
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: rivescript-editor-vsce
+          path: rivescript-editor-vsce-0.0.1.vsix
+          retention-days: 1
