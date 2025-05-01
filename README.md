@@ -7,7 +7,7 @@
 
 A Visual Studio Code extension that elevates your RiveScript development workflow by combining robust syntax support with an integrated chat interface. With syntax highlighting, language-aware editing features, and a live preview panel, you can write, test, and iterate on your conversational scripts without ever leaving your editor.
 
-![RiveScript VS Code Extension Screenshot](screenshot.png)
+![RiveScript VS Code Extension Screenshot](https://raw.githubusercontent.com/nthnn/rivescript-vsce/main/screenshot.png)
 
 - **Rich Syntax Highlighting**: Colorized tokens for triggers, replies, variables, comments, and more—so your `.rive` files are always clear and easy to read.
 
