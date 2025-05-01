@@ -1,0 +1,49 @@
+{
+    "name": "rivescript-editor",
+    "displayName": "RiveScript Chat Tester",
+    "description": "Test RiveScript files with syntax support and a chat UI inside VS Code",
+    "version": "0.0.1",
+    "publisher": "nthnn",
+    "icon": "media/rivescript-icon.png",
+    "repository": "https://github.com/nthnn/rivescript-vsce",
+    "engines": {"vscode": "^1.91.0"},
+    "categories": ["Programming Languages"],
+    "main": "./extension.js",
+    "activationEvents": [
+        "onCommand:extension.testRive",
+        "onLanguage:rivescript"
+    ],
+    "scripts": {},
+    "dependencies": {
+        "rivescript": "^1.19.0"
+    },
+    "contributes": {
+        "languages": [{
+            "id": "rivescript",
+            "aliases": [
+                "RiveScript",
+                "rivescript"
+            ],
+            "extensions": [".rive"],
+            "configuration": "./syntaxes/language-configuration.json",
+            "icon": {
+                "light": "media/rivescript-icon.png",
+                "dark": "media/rivescript-icon.png"
+            }
+        }],
+        "grammars": [{
+            "language": "rivescript",
+            "scopeName": "source.rivescript",
+            "path": "./syntaxes/riveScript.tmLanguage.json"
+        }],
+        "commands": [{
+            "command": "extension.testRive",
+            "title": "Test RiveScript (Ctrl+Shift+T)"
+        }],
+        "keybindings": [{
+            "command": "extension.testRive",
+            "key": "ctrl+shift+t",
+            "when": "editorTextFocus && editorLangId == rivescript"
+        }]
+    }
+}
